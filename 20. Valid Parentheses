@@ -1,0 +1,41 @@
+class Solution {
+    public boolean isValid(String s) {
+       
+        Stack<Character> stack = new Stack();
+
+        for(char c : s.toCharArray()){
+            if(isOpen(c))
+                stack.push(c);
+            else{
+                char top;
+                if(!stack.isEmpty())
+                    top = stack.pop();
+                else
+                    return false;
+
+                if(!isMatching(top , c))
+                    return false;
+            }
+        }
+
+        if(!stack.isEmpty())
+            return false;
+
+            return true;
+    }
+
+    protected boolean isOpen(char c){
+        if(c == '(' || c == '{' || c =='[')
+            return true;
+        return false;
+    }
+
+    protected boolean isMatching(char a , char b){
+        if((a == '{' && b == '}') ||
+        (a == '(' && b == ')') ||
+        (a == '[' && b == ']'))
+            return true;
+
+        return false;
+    }
+}
