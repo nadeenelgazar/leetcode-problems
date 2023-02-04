@@ -1,0 +1,23 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int minValue = prices[0];
+        int profit = 0;
+        int maxValue = 0;
+
+        for(int i = 1 ; i < prices.length ; i++){
+          /* check for the min value while looping */
+            if(prices[i] < minValue){
+                minValue = prices[i];
+            }
+           /* check if for maxValue then update profit */  
+            else if(prices[i] >= maxValue ){
+                 profit =  prices[i] - minValue;
+                maxValue = prices[i];
+            }
+            /* for updating profit incase where there is more profit and not getting in the above if*/
+            if(profit < prices[i] - minValue )
+                profit =  prices[i] - minValue;
+        }
+        return profit;
+    }
+}
