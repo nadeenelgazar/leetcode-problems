@@ -1,0 +1,24 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+       /* return the same image if there is no need to do any change */
+        if(image[sr][sc] == color)
+            return image;
+       /* make a dfs to change the pixles */
+        dfs(image,sr,sc,image[sr][sc],color);
+
+        return image;
+    }
+
+    public void dfs(int[][] image, int sr, int sc,int target ,int color){
+       /* check boundries and if it needs to be changed if not it will return */
+        if(sr < 0 || sc < 0 || sr > image.length - 1 || sc > image[0].length - 1 ||
+        image[sr][sc] != target)
+            return ;
+        
+        image[sr][sc] = color;
+        dfs(image,sr-1,sc,target,color);
+        dfs(image,sr+1,sc,target,color);
+        dfs(image,sr,sc - 1,target,color);
+        dfs(image,sr,sc + 1,target,color);
+    }
+}733. Flood Fill
