@@ -1,0 +1,20 @@
+/* sort both of them then compare */
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        char[] ransomNoteArray = ransomNote.toCharArray();
+        char[] magazineArray = magazine.toCharArray();
+
+        Arrays.sort(ransomNoteArray);
+        Arrays.sort(magazineArray);
+        int j = 0;
+        for(int i = 0 ; i < magazineArray.length && j < ransomNoteArray.length ; i++){
+            if(ransomNoteArray[j] == magazineArray[i])
+                j++;
+        }
+
+        if(j == ransomNoteArray.length)
+            return true;
+
+        return false;
+    }
+}
