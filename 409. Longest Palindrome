@@ -1,0 +1,30 @@
+class Solution {
+/* using a hashMap to count the occurance of each character, the if its occurance is even so added it
+ * else if odd add its value minus one , at last check if there is any odd number add 1
+ */
+    public int longestPalindrome(String s) {
+       int maxOdd = 0;
+       HashMap<Character , Integer> map = new HashMap<>();
+       int result = 0;
+       boolean flag = false;
+
+       for(char c : s.toCharArray()){
+           map.put(c,map.getOrDefault(c,0) + 1);
+       } 
+
+        for (Integer val: map.values()) {
+            if(val % 2 == 0)
+                result+= val;
+            else{
+                flag = true;
+                result+=(val - 1);
+            }
+        }
+
+       if(flag)
+          result++;
+
+        return result;
+            
+    }
+}
