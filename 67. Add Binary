@@ -1,0 +1,63 @@
+/*
+ * calculate answer normally as any addition operation concatenating each digit to
+ * to reverseAns then at the end reversing it to have the anser
+ */
+class Solution {
+    public String addBinary(String a, String b) {
+        StringBuilder reverseAns = new StringBuilder();
+        int carry = 0;
+        int i = a.length() -1;
+        int j = b.length() - 1;
+
+        while(i >= 0 && j >= 0){
+            int x = Character.getNumericValue(a.charAt(i));
+            int y = Character.getNumericValue(b.charAt(j));
+
+            int sum = x + y + carry;
+            carry = calculateReverseAnsAndCarry(sum , carry ,reverseAns);
+
+            i--;
+            j--;
+        }
+
+        while(i >= 0){
+            int x = Character.getNumericValue(a.charAt(i));
+            int sum = x + carry ;
+
+           carry = calculateReverseAnsAndCarry(sum , carry ,reverseAns);
+            i--;
+        }
+
+         while(j >= 0){
+            int x = Character.getNumericValue(b.charAt(j));
+            int sum = x + carry ;
+
+          carry = calculateReverseAnsAndCarry(sum , carry ,reverseAns);
+            j--;
+        }
+
+        if(carry == 1)
+         reverseAns.append("1");
+
+        return reverseAns.reverse().toString();
+    }
+    
+    /* helpful function to calculate carry and reverseAns */
+    public int calculateReverseAnsAndCarry(int sum ,int carry , StringBuilder reverseAns){
+          if(sum == 0){
+                reverseAns.append("0");
+                carry = 0;
+            }else if(sum == 1){
+                 reverseAns.append("1");
+                 carry = 0;
+            }else if(sum == 2){
+                 reverseAns.append("0");
+                carry = 1;
+            }else{
+                reverseAns.append("1");
+                carry = 1;
+            }
+
+            return carry;
+    }
+}
