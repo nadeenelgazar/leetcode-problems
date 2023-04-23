@@ -1,0 +1,45 @@
+/*
+ * this problem is solved recursively(bottom-Up) , by calculating height and diamater for each node
+ * height is used to be returned to calculate the diameter of the node's parent.
+ * diamater is compared with variable (max) at each step. some main points:
+ * - null node will have (-1) value to be easier in calculations.
+ * - hieght = 1 + max(left , right)
+ * - diameter = left + right + 2 (this 2 for 2 edges one from right and one from left)
+ */
+
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int max = 0;
+
+    public int diameterOfBinaryTree(TreeNode root){
+          dfs(root);
+        return max;
+    }
+
+    public int dfs(TreeNode root){
+        if(root == null)
+            return -1;
+         int right = dfs(root.right);
+        int left = dfs(root.left);
+        int diameter =right + left + 2 ;
+        max = Math.max(max,diameter);
+        return Math.max(left , right ) +1 ;
+    }
+
+}
