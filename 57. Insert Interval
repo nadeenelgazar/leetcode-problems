@@ -1,3 +1,32 @@
+first sol:
+class Solution {
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        ArrayList<int[]> ans = new ArrayList<>();
+        boolean flag = true;
+
+        for(int[] interval : intervals){
+            if(interval[1] < newInterval[0]){
+                ans.add(interval);
+            }else if(interval[0] > newInterval[1]){
+                 if(flag){ ans.add(newInterval);}
+                   ans.add(interval);
+                   flag=false;
+            }else{
+                newInterval[0]=Math.min(interval[0],newInterval[0]);
+                newInterval[1]=Math.max(interval[1],newInterval[1]);
+            }
+        }
+
+        if(flag) ans.add(newInterval);
+
+        int[][] arr = new int[ans.size()][2];
+        arr = ans.toArray(arr);
+        return arr;
+    }
+}
+
+
+second sol:
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
         ArrayList<int[]> intervalsList = new ArrayList<>();
