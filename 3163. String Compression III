@@ -1,0 +1,22 @@
+class Solution {
+    public String compressedString(String word) {
+        StringBuilder sb = new StringBuilder();
+        char[] array = word.toCharArray();
+
+        for(int i = 0 ; i < array.length ; i++){
+            int cnt = 1;
+            char c = array[i];
+            for(int j = i + 1 ; j < array.length && c == array[j] ; j++ ){
+                cnt++;
+                i = j;
+                if(cnt == 9){
+                    break;
+                }   
+            }
+            sb.append(cnt);
+            sb.append(c);
+        }
+
+        return sb.toString();
+    }
+}
